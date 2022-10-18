@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "author": "Nathane Martins",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-dht22", "id": "dht1", "top": -94.39, "left": -211, "attrs": {} },
+    { "type": "wokwi-ks2e-m-dc5", "id": "relay1", "top": -38.34, "left": 245.21, "attrs": {} },
+    { "type": "wokwi-ks2e-m-dc5", "id": "relay2", "top": 164.07, "left": 236.29, "attrs": {} },
+    {
+      "type": "wokwi-led",
+      "id": "led1",
+      "top": -26.7,
+      "left": 161.57,
+      "attrs": { "color": "red", "flip": "1" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led2",
+      "top": 223.74,
+      "left": 138.29,
+      "attrs": { "color": "red", "flip": "1" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX0", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX0", "$serialMonitor:TX", "", [] ],
+    [ "led1:C", "relay1:NO1", "red", [ "v-0.16", "h62.88" ] ],
+    [ "relay1:COIL2", "esp:D27", "gold", [ "v-20.99", "h-348.65", "v164.87" ] ],
+    [ "relay1:P1", "relay1:COIL1", "black", [ "v26.18", "h7.09" ] ],
+    [ "relay1:COIL1", "esp:GND.1", "black", [ "v82.94", "h-172.06", "v27.93" ] ],
+    [ "esp:GND.1", "relay2:COIL1", "black", [ "h43.65", "v72.45", "h165.77", "v-2.7" ] ],
+    [ "esp:3V3", "led2:A", "red", [ "v0" ] ],
+    [ "led2:C", "relay2:NO1", "red", [ "v0.76", "h73.55" ] ],
+    [ "relay2:P1", "relay2:COIL1", "black", [ "v24.68", "h29.53", "v-6.31" ] ],
+    [ "dht1:GND", "esp:GND.2", "black", [ "v0" ] ],
+    [ "esp:D15", "dht1:SDA", "gold", [ "h0" ] ],
+    [ "esp:D14", "relay2:COIL2", "gold", [ "h0" ] ],
+    [ "dht1:VCC", "esp:VIN", "red", [ "v0" ] ],
+    [ "esp:VIN", "led1:A", "red", [ "h158.24", "v-0.65" ] ]
+  ]
+}
